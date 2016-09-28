@@ -1,0 +1,114 @@
+
+{#{% load staticfiles %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="zh-CN"><head>#}
+{#<meta http-equiv="content-type" content="text/html; charset=UTF-8">#}
+{#    <meta charset="utf-8">#}
+{#    <meta http-equiv="X-UA-Compatible" content="IE=edge">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->#}
+{#    <meta name="description" content="">#}
+{#    <meta name="author" content="">#}
+{#    <link rel="icon" href="http://v3.bootcss.com/favicon.ico">#}
+{##}
+{#    <title>登录</title>#}
+{##}
+{#    <!-- Bootstrap core CSS -->#}
+{#    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">#}
+{##}
+{#    <!-- Custom styles for this template -->#}
+{#    <link href="{% static 'css/signin.css' %}" rel="stylesheet">#}
+{##}
+{#  </head>#}
+{##}
+{#  <body><div style="position: absolute; left: -1px; bottom: -1px; z-index: 0; width: 0px; height: 0px; overflow: hidden; visibility: hidden; display: none;" id="BAIDU_DUP_fp_wrapper"><iframe style="width: 0px; height: 0px; visibility: hidden; display: none;" src="Signin%20Template%20for%20Bootstrap_files/o.htm" id="BAIDU_DUP_fp_iframe"></iframe></div>#}
+{##}
+{#    <div class="container">#}
+{##}
+{#      <form class="form-signin" action="{% url 'login' %}">#}
+{#        <h2 class="form-signin-heading">请登录</h2>#}
+{##}
+{#        <input id="inputEmail" class="form-control" placeholder="username" required="" autofocus="" type="text" name="username">#}
+{##}
+{#        <input id="inputPassword" class="form-control" placeholder="Password" required="" type="password" name="password">#}
+{#        <div class="checkbox">#}
+{#          <label>#}
+{#            <input value="remember-me" type="checkbox"> Remember me#}
+{#          </label>#}
+{#        </div>#}
+{#        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>#}
+{#      </form>#}
+{##}
+{#    </div> <!-- /container -->#}
+{##}
+{##}
+{#  </body></html>#}
+
+
+{#<!DOCTYPE html>#}
+{#<html>#}
+{#<head>#}
+{#		<meta charset="utf-8">#}
+{#		<link href="{% static 'css/reglogin.css' %}" rel='stylesheet' type='text/css' />#}
+{#		<meta name="viewport" content="width=device-width, initial-scale=1">#}
+{#</head>#}
+{#<body>#}
+{#	<div class="main" >#}
+{#		<div class="header"  >#}
+{#			<h1>请登录：</h1>#}
+{#		</div>#}
+{#		<p></p>#}
+{#			<form action="{% url 'login' %}">#}
+{#				<ul class="right-form">#}
+{#					<h2>Login</h2>#}
+{#					<li><input type="text" placeholder="Username" name="username" required/></li>#}
+{#					<li><input type="password" placeholder="Password" name="password" required/></li>#}
+{#					<input type="submit" value="Login" >#}
+{#					<div class="clear"> </div>#}
+{#				</ul>#}
+{#				<div class="clear"> </div>#}
+{##}
+{#			</form>#}
+{#	</div>#}
+{#</body>#}
+{#</html>#}
+
+
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<link href="{% static 'css/reglogin.css' %}" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="main">
+		<div class="header" >
+			<h1>Login!</h1>
+		</div>
+		<p></p>
+			<form action="{% url 'login' %}" method="post">
+				<ul class="right-form">
+					<h2>Login:</h2>
+					<li><input name="username" type="text" placeholder="Username" required/></li>
+					<li><input name="password" type="password" placeholder="Password" required/></li>
+					<input type="submit" value="Login" >
+					<div class="clear"> </div>
+				</ul>
+				<div class="clear"> </div>
+                <input type="hidden" name="next" value="{{ req.GET.next }}">
+                {% csrf_token %}
+			</form>
+	</div>
+    <div style="display: none">{{ log_err }}</div>
+<script type="text/javascript">
+    var err = '{{ log_err }}'
+    if (err) {
+        alert(err)
+    }
+</script>
+</body>
+</html>
+
+

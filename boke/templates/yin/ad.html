@@ -1,0 +1,32 @@
+{% load staticfiles %}
+<div class="banner">
+
+    <div id="slide-holder">
+        <div id="slide-runner">
+            {% for did in dids %}
+                <a href="/" target="_blank"><img width="670" height="280" id="{{ did.id }}" src='{{ MEDIA_URL }}{{ did.image_url }}' alt=""/></a>
+            {% endfor %}
+            <div id="slide-controls">
+                <p id="slide-client" class="text"><strong></strong><span></span></p>
+                <p id="slide-desc" class="text"></p>
+                <p id="slide-nav"></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        if (!window.slider) {
+            var slider = {};
+        }
+
+
+        slider.data = [
+            {% for did in dids %}
+                {
+                    "id": "{{ did.id }}", // 与slide-runner中的img标签id对应
+                    "client": "{{ did.title }}",
+                    "desc": "{{ did.desc }}" //这里修改描述
+                },
+            {% endfor %}
+        ];
+    </script>
+</div>
