@@ -1,0 +1,139 @@
+git config --global user.email "邮箱"
+git config --global user.name "用户名"
+
+git init 初始化
+ '
+git status 查看版本仓库状态
+git add 文件名（.）  增加到暂停区
+git rm --cached .删除暂停区的东西
+git checkout . 把缓存区的退回来
+git commit -m "描述" 向版本仓库提交
+git log  查看版本信息
+git log --pretty=oneline
+git reset --hard 版本号      返回版本
+git commit -am '描述' add和commit一起
+git remote add origin https://github.com/cy12/boke.git 与远程连接
+git remote -v   
+git pull origin master 下载一个master
+git push -u origin master:master 上传
+
+git clone 地址   下载
+
+git checkout -- 名 撤销
+
+git checkout --file   文件内恢复
+
+git checkout 删除
+
+
+
+
+
+
+svn git github coding
+
+svn:集中式版本控制系统  ，可以对目录进行权限控制  ，通过对服务器的版本修改，提交，服务器相当于图书馆，大家每次修改相当于借书，没有服务器，不能工作。svn没有网络拒绝工作
+git:分布式版本控制系统  每个用户互相合并修改，git服务器，只是为了方便用户互相连接
+
+$ mkdir learngit
+$ cd learngit
+$ pwd
+/Users/michael/learngit
+
+对于 二进制文件的改动，比如图片，音频，视频， 只知道从100kb 改成了 200kb ，不知道具体改了什么
+
+
+不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的，前面我们举的例子只是为了演示，如果要真正使用版本控制系统，就要以纯文本方式编写文件。
+因为文本是有编码的，比如中文有常用的GBK编码，日文有Shift_JIS编码，如果没有历史遗留问题，强烈建议使用标准的UTF-8编码，所有语言使用同一种编码，既没有冲突，又被所有平台所支持。
+
+
+ssh-keygen -t rsa -C  'your email@domain.com' 生成公私钥
+
+
+git命令
+ 
+git init +路径  变成git仓库
+git add +多个文件名字用空格隔开  把文件或者修改添加到仓库
+git commit -m”原因” 把文件提交到仓库  一个commit对应多个add
+git status命令看看仓库的当前状态
+git diff参看 改变
+ git diff head -- 1.txt
+git log --pretty=oneline  查看提交 log ，  commit ID是一个shall算出来的串，不像是svn的1，2，3,因为git 是分布式的。每一个commit都是存档，如果要回滚的话，只能从 commit来回滚 ，最上面的是最新的修改 
+
+$ git reset --hard HEAD^  回滚上一个版本，大上个就是head^^ 如果100个，就是head~100
+
+对于已经回滚的 commit ，如果关机了，可以通过 git reflog 来找commitID ，查看命令log
+
+用git diff HEAD -- readme.txt命令可以查看工作区和版本库里面最新版本的区别：
+
+git add把修改放到stage区里暂存区
+git commit把暂存区的所有修改提交到分支
+
+ 在.git中，有stage,还有Git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD
+
+cat 1.txt 查看一个文件
+cat>>1.txt，编辑一个文件，用control＋z结束，
+
+vi 1.txt 按i 修改 ，esc后 wq 保存 ，q退出
+git checkout  就是回滚到上一次add或者git commit之前的状态，其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”
+
+$ git reset HEAD 1.txt  head代表最新的版本，  这个命令不但可以回滚commit的文件，还可以回滚stage区的修改
+
+
+远程仓库
+git仓库和github是通过ssh加密的
+通过rsa生成公私钥，多台电脑生成多个 钥匙
+
+
+git remote add origin https://github.com/zyh2002my/gitTest1404C.git
+
+第一次git push -u origin master把当前分支master推送到远程  -u代表把远程和本地的master关联起来
+
+$ git push origin master  每次修改，本地推送到远程
+
+
+用rss算法 算出公钥匙，发给github ，github也算出自己的公钥，发给你，加到本机的列表中，来验证双方的身份 
+
+
+git clone https://github.com/zyh2002my/getGit.git   克隆一份 到本地
+
+head指向master分支， master指向最新提交，创建dev分支的指针，指向和master相同的最新提交，然后把head指向dev，这样dev开发完成后，在把master指向和dev相同的提交，然后删除掉dev
+
+git branch 查看当前分支
+git checkout -b dev相当于
+
+gitc branch dev
+git checkout dev
+提交都是对于 dev的
+git checkout master 把dev的工作 切换到master
+
+git merge dev 命令用于合并指定分支到当前分支
+git branch -d dev 删除dev
+因为创建、合并和删除分支非常快，所以Git鼓励你使用分支完成某个任务，合并后再删掉分支，这和直接在master分支上工作效果是一样的，但过程更安全。
+
+用git log --graph命令可以看到分支合并图。
+
+通常，合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+
+18301079188
+
+git stash 保存当前分支的工作状态
+git stash list 查看保存的工作现场
+工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：
+一是用git stash apply恢复，但是恢复后，stash内容并不删除，你需要用git stash drop来删除；
+另一种方式是用git stash pop，恢复的同时把stash内容也删了
+你可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令：
+$ git stash apply stash@{0}
+
+
+master ，dev ，head
+
+＋浩然———+海参———+小卡
+
+
+git diff b
+git status
+git log
+git reflog
+
+
