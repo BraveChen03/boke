@@ -1,6 +1,6 @@
 #coding:utf8
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect
-
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,authenticate,logout
 
@@ -149,6 +149,7 @@ def comment_post(req):
 #         login(req,user)
 #         return HttpResponseRedirect('/')
 #     return render(req,'yin/login.html',locals())
+@csrf_exempt
 def login_x(req):
     if req.method == 'GET': # 请求登陆页面 但没有提交信息
         return render(req,'yin/login.html')
